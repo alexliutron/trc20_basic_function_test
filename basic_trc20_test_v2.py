@@ -36,7 +36,7 @@ contractAddress = "41a5c20f94c36cdd04165081828a865e028f4fbb25"
 
 #owneraddress&privatekey
 owner_address = ""
-owner_address_privateKey = ""
+owner_address_privateKey = "
 
 
 # owner_address for test transferFrom
@@ -54,35 +54,65 @@ function_para = {
         
         "balanceOf(address)":{"contract_address": contractAddress,
                               "function_selector":"balanceOf(address)",  
-                              "parameter":"0000000000000000000000417946F66D0FC67924DA0AC9936183AB3B07C81126",
+                              #比如查询TM2TmqauSEiRf16CyFgzHV2BVxBejY9iyR 的余额
+                              
+                              "parameter":"0000000000000000000000417946F66D0FC67924DA0AC9936183AB3B07C81126", 
+                              #地址TM2TmqauSEiRf16CyFgzHV2BVxBejY9iyR 转HexString为：417946F66D0FC67924DA0AC9936183AB3B07C81126
+                              #parameter每个参数长度需64位，不足前面补0，故为：0000000000000000000000417946F66D0FC67924DA0AC9936183AB3B07C81126。
+                              
                               "fee_limit":1000000000,
                               "call_value":0,
                               "owner_address": owner_address},
                   
         "transfer(address,uint256)":{"contract_address": contractAddress,
-                              "function_selector":"transfer(address,uint256)",  
+                              "function_selector":"transfer(address,uint256)", 
+                              #给地址TV3nb5HYFe2xBEmyb3ETe93UGkjAhWyzrs(HexString格式：41D148171F1CEEEB40D668C47D70E7E94E67977559)转账0.00005 trc20_token。(假如trc20_token精度为6，故带精度转账金额为50)
+                             
                               "parameter":"000000000000000000000041D148171F1CEEEB40D668C47D70E7E94E679775590000000000000000000000000000000000000000000000000000000000000032",
+                              #前64位是address参数：000000000000000000000041D148171F1CEEEB40D668C47D70E7E94E6797755
+                              #后64位地址为带精度转账金额的十六进制格式，带精度转账金额50转十六进制后为32，不足64位，前面补0，故为：0000000000000000000000000000000000000000000000000000000000000032
+                              
                               "fee_limit":1000000000,
                               "call_value":0,
                               "owner_address": owner_address},
                  
         "approve(address,uint256)":{"contract_address": contractAddress,
                               "function_selector":"approve(address,uint256)",  
-                              "parameter":"000000000000000000000041D148171F1CEEEB40D668C47D70E7E94E679775590000000000000000000000000000000000000000000000000000000000000132",
+                              #账户A允许B账户随意调用不超过A拥有的trc20_token数量,比如A允许B账户调用其100个trc20_token,则账户A需调用approve(B,100)。
+                              #账户B：TM2TmqauSEiRf16CyFgzHV2BVxBejY9iyR（41D148171F1CEEEB40D668C47D70E7E94E67977559）
+                                    
+                              "parameter":"000000000000000000000041D148171F1CEEEB40D668C47D70E7E94E679775590000000000000000000000000000000000000000000000000000000000000064",
+                              #前64位为账户B地址转HexString并补0：000000000000000000000041D148171F1CEEEB40D668C47D70E7E94E67977559
+                              #后64位为允许B账户随意调用100个(带精度)，转16进制并补0:0000000000000000000000000000000000000000000000000000000000000064
+                                    
                               "fee_limit":1000000000,
                               "call_value":0,
                               "owner_address": owner_address},
                 
         "allowance(address,address)":{"contract_address": contractAddress,
-                              "function_selector":"allowance(address,address)",  
+                              "function_selector":"allowance(address,address)", 
+                              #allowance(A, B)可以查看B账户还能够调用A账户多少个token
+                              
                               "parameter":"0000000000000000000000417946F66D0FC67924DA0AC9936183AB3B07C81126000000000000000000000041D148171F1CEEEB40D668C47D70E7E94E67977559",
+                              #前64位为账户A地址转HexString并补0：TM2TmqauSEiRf16CyFgzHV2BVxBejY9iyR（417946F66D0FC67924DA0AC9936183AB3B07C81126）
+                              #后64位位账户B地址转HexString并补0：TV3nb5HYFe2xBEmyb3ETe93UGkjAhWyzrs（41D148171F1CEEEB40D668C47D70E7E94E67977559）
+                                      
                               "fee_limit":1000000000,
+                              "function_selector":"allowance(address,address)", 
+                              "function_selector":"allowance(address,address)", 
                               "call_value":0,
                               "owner_address": owner_address}, 
                   
         "transferFrom(address,address,uint256)":{"contract_address": contractAddress,
-                              "function_selector":"transferFrom(address,address,uint256)",  
+                              "function_selector":"transferFrom(address,address,uint256)", 
+                              #A调用approve(B,100)后，当B账户想用这100个trc20_token中的50个给C账户时，则需B调用transferFrom(A, C, 50)。
+                                                 
                               "parameter":"0000000000000000000000417946F66D0FC67924DA0AC9936183AB3B07C81126000000000000000000000041EE06EDC05F8E502A2752FE19FDD83E6DF3AFC8FB0000000000000000000000000000000000000000000000000000000000000032",
+                              #有三个参数
+                              #前64位为账户A地址转HexString并补0：TM2TmqauSEiRf16CyFgzHV2BVxBejY9iyR（417946F66D0FC67924DA0AC9936183AB3B07C81126）
+                              #中间64位为账户C地址转HexString并补0：TXfn88Wcr2fJocZ1dAzxL46xx1jKgpF4f4（41EE06EDC05F8E502A2752FE19FDD83E6DF3AFC8FB）
+                              #后64位地址为带精度转账金额的十六进制格式，带精度转账金额50转十六进制后为32，不足64位，前面补0，
+                                                 
                               "fee_limit":1000000000,
                               "call_value":0,
                               "owner_address": owner_address_transfrom}
