@@ -66,7 +66,7 @@ function_para = {
                   
         "transfer(address,uint256)":{"contract_address": contractAddress,
                               "function_selector":"transfer(address,uint256)", 
-                              #给账户BTV3nb5HYFe2xBEmyb3ETe93UGkjAhWyzrs转账0.00005个trc20_token。
+                              #给账户B:TV3nb5HYFe2xBEmyb3ETe93UGkjAhWyzrs转账0.00005个trc20_token。
                               #假如trc20_token精度为6，故带精度转账金额为50，故需调用transfer(B,50)
                              
                               "parameter":"000000000000000000000041D148171F1CEEEB40D668C47D70E7E94E679775590000000000000000000000000000000000000000000000000000000000000032",
