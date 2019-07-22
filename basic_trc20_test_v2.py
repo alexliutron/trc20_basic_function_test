@@ -54,10 +54,10 @@ function_para = {
         
         "balanceOf(address)":{"contract_address": contractAddress,
                               "function_selector":"balanceOf(address)",  
-                              #比如查询TM2TmqauSEiRf16CyFgzHV2BVxBejY9iyR 的余额
+                              #比如查询账户TM2TmqauSEiRf16CyFgzHV2BVxBejY9iyR 的余额
                               
                               "parameter":"0000000000000000000000417946F66D0FC67924DA0AC9936183AB3B07C81126", 
-                              #地址TM2TmqauSEiRf16CyFgzHV2BVxBejY9iyR 转HexString为：417946F66D0FC67924DA0AC9936183AB3B07C81126
+                              #账户TM2TmqauSEiRf16CyFgzHV2BVxBejY9iyR 转HexString为：417946F66D0FC67924DA0AC9936183AB3B07C81126
                               #parameter每个参数长度需64位，不足前面补0，故为：0000000000000000000000417946F66D0FC67924DA0AC9936183AB3B07C81126。
                               
                               "fee_limit":1000000000,
@@ -66,10 +66,12 @@ function_para = {
                   
         "transfer(address,uint256)":{"contract_address": contractAddress,
                               "function_selector":"transfer(address,uint256)", 
-                              #给地址TV3nb5HYFe2xBEmyb3ETe93UGkjAhWyzrs(HexString格式：41D148171F1CEEEB40D668C47D70E7E94E67977559)转账0.00005 trc20_token。(假如trc20_token精度为6，故带精度转账金额为50)
+                              #给账户BTV3nb5HYFe2xBEmyb3ETe93UGkjAhWyzrs转账0.00005个trc20_token。
+                              #假如trc20_token精度为6，故带精度转账金额为50，故需调用transfer(B,50)
                              
                               "parameter":"000000000000000000000041D148171F1CEEEB40D668C47D70E7E94E679775590000000000000000000000000000000000000000000000000000000000000032",
-                              #前64位是address参数：000000000000000000000041D148171F1CEEEB40D668C47D70E7E94E6797755
+                              #账户TV3nb5HYFe2xBEmyb3ETe93UGkjAhWyzrs转HexString为：41D148171F1CEEEB40D668C47D70E7E94E67977559
+                              #前64位是address参数：000000000000000000000041D148171F1CEEEB40D668C47D70E7E94E67977559
                               #后64位地址为带精度转账金额的十六进制格式，带精度转账金额50转十六进制后为32，不足64位，前面补0，故为：0000000000000000000000000000000000000000000000000000000000000032
                               
                               "fee_limit":1000000000,
